@@ -1,5 +1,8 @@
 import 'dotenv/config';
-import express, { type Request, Response, NextFunction } from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+import expressStatic from "express";
+const log = (...args: any[]) => console.log("[server]", ...args);
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -51,11 +54,17 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+	if (app.get("env") === "development") {
+	  // import dinamico: compila solo in dev
+	  const { setupVite } = await import("./vite");
+	  await setupVite(app, server);
+	} else {
+	  // serve i file statici senza vite
+	  const __dirname = path.dirname(fileURLToPath(import.meta.url));
+	  const clientPath = path.resolve(__dirname, "../dist/public");
+	  app.use(expressStatic.static(clientPath));
+	  log("serving static files from", clientPath);
+	}
 
   // ALWAYS serve the app on the port specified in the environment variable PORT
   // Other ports are firewalled. Default to 5000 if not specified.
