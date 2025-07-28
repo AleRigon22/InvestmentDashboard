@@ -18,10 +18,10 @@ app.use((req, res, next) => {
   let capturedJson: any;
 
   const originalJson = res.json.bind(res);
-  res.json = (body, ...rest: any[]) => {
-    capturedJson = body;
-    return (originalJson as any)(body, ...rest as any[]);
-  };
+	res.json = (body, ...rest: any[]) => {
+	  capturedJson = body;
+	  return originalJson(body, ...rest as any[]);
+	};
 
   res.on('finish', () => {
     if (reqPath.startsWith('/api')) {

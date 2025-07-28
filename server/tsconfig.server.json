@@ -4,35 +4,26 @@
     "module": "es2020",
     "outDir": "../dist",
     "moduleResolution": "node",
-	"module": "nodenext",
-	"moduleResolution": "node16",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
-	"verbatimModuleSyntax": true
-
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["../shared/*"]
     },
-
     "types": ["node"],
     "typeRoots": ["../node_modules/@types"]
   },
-
 
   "include": [
     "./db.ts",
     "./routes.ts",
     "./index.ts",
-    "./storage.ts",
+    "./storage.ts"
   ],
-
-
   "exclude": [
     "./__tests__",
     "./dev/**",
-    "./vite.ts",
     "../vite.config.ts"
   ]
 }
