@@ -14,11 +14,15 @@
     "types": ["node"],
     "typeRoots": ["../node_modules/@types"]
   },
-	"include": [
-	  "./**/*.ts"
-	],
-  "exclude": [
-    "./__tests__",
-    "./vite.ts"
-  ]
+"include": [
+  "./db.ts",
+  "./routes.ts",
+  "./index.ts",
+  "./storage.ts",
+  "./server.ts"
+],
+"exclude": [
+  "./__tests__",
+  "./vite.ts"
+]
 }
