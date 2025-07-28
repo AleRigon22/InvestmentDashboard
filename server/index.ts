@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   const originalJson = res.json.bind(res);
   res.json = (body, ...rest: any[]) => {
     captured = body;
-    return originalJson(body, ...rest);
+    return originalResJson.apply(res, [bodyJson, ...args as any[]]);
   };
 
   res.on('finish', () => {
