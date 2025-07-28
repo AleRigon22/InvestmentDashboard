@@ -4,9 +4,12 @@
     "module": "es2020",
     "outDir": "../dist",
     "moduleResolution": "node",
+	"module": "nodenext",
+	"moduleResolution": "node16",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
+	"verbatimModuleSyntax": true
 
     "baseUrl": ".",
     "paths": {

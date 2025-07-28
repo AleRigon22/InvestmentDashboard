@@ -2,7 +2,7 @@ import 'dotenv/config';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import express, { Request, Response, NextFunction } from 'express';
-import { registerRoutes } from './routes';
+import { registerRoutes } from './routes.js';
 
 // logger minimale
 const log = (...args: any[]) => console.log('[server]', ...args);
