@@ -7,19 +7,29 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
+
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["../shared/*"]
     },
+
     "types": ["node"],
-	"typeRoots": ["./node_modules/@types"]
+    "typeRoots": ["../node_modules/@types"]
   },
-	"include": [
-	  "./**/*.ts"
-	],
-	"exclude": [
-	  "./__tests__",
-	  "./dev/**",
-	  "../vite.config.ts"
-	]
+
+
+  "include": [
+    "./db.ts",
+    "./routes.ts",
+    "./index.ts",
+    "./storage.ts",
+  ],
+
+
+  "exclude": [
+    "./__tests__",
+    "./dev/**",
+    "./vite.ts",
+    "../vite.config.ts"
+  ]
 }
