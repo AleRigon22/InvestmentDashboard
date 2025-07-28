@@ -1,0 +1,60 @@
+Please update the Manual Investment Portfolio Tracker project with the following combined changes:
+
+1️⃣ Login – Automatic Redirect to Dashboard
+Current issue:
+After login, the user remains on the login page and has to refresh manually.
+
+Required fix:
+After successful login, automatically redirect the user to the Dashboard (Portfolio Overview).
+
+Use client-side navigation (e.g., navigate("/dashboard") or equivalent).
+
+Ensure the authentication token/session is properly saved before redirecting.
+
+Do not require manual page refresh.
+
+2️⃣ Portfolio Performance Graph – Y-Axis and Time Range Selector Fix
+Current issues:
+The Y-axis is stuck at €0 regardless of the actual data.
+
+The time range selector is not functional.
+
+Required fixes:
+Y-Axis Auto-Scaling:
+Make the Y-axis dynamically adjust to the highest value in the selected data range.
+
+The graph must always start at €0 and scale appropriately.
+
+Time Range Selector – Updated Options:
+New Option	Behavior
+3M	Show the last 3 months of data
+6M	Show the last 6 months of data
+YTD	Show data from January 1st of the current year to today
+Max	Show all historical data available
+
+Interaction behavior:
+When the user switches between the ranges, the graph must:
+
+Filter the data points accordingly
+
+Auto-scale the Y-axis
+
+Render the graph immediately without requiring a page refresh
+
+3️⃣ Scope of the Change
+Apply these fixes to both the Dashboard graph and the History graph if the same issue exists there.
+
+Use the snapshots as data source for both graphs to ensure consistency.
+
+4️⃣ Summary of Actions
+Feature	Action
+Login Redirect	Redirect to Dashboard automatically after login
+Y-Axis Scaling	Make the graph Y-axis dynamic, starting from €0
+Time Range Selector	Use only: 3M, 6M, YTD, Max
+Graph Interaction	Update graphs immediately based on user selection
+
+Final instruction to Replit AI:
+Apply all these changes to the current project.
+Ensure a smooth login flow, correct graph scaling, and functional time range filtering in both the Dashboard and History sections.
+
+Test the user journey from login to dashboard, and validate all time range selections on the performance graph.

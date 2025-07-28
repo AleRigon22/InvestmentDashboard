@@ -1,0 +1,62 @@
+Please apply the following updates to the existing Manual Investment Portfolio Tracker project:
+
+1️⃣ Edit Asset – Pre-fill Asset Name and Ticker
+Current issue:
+When editing an asset via the Holdings Edit Modal, the Asset Name and Ticker fields do not show the values previously entered.
+
+Required fix:
+
+Ensure that when the user opens the Edit Asset modal, the following fields are pre-filled with the data already stored:
+
+Field	Behavior
+Asset Name	Pre-filled with the current name of the asset
+Ticker	Pre-filled with the current ticker of the asset
+
+The user must be able to modify these fields if needed, but the default values must reflect the existing stored data.
+
+2️⃣ Fee Handling – Correct Impact on Total Value
+Current issue:
+Currently, fees are not correctly deducted from the invested capital during buy/sell operations.
+
+Required behavior:
+Buy Transaction:
+The Quantity and Unit Price remain as input by the user.
+
+The total invested amount is:
+
+mathematica
+Copia
+Modifica
+Total Buy = (Quantity × Unit Price) – Fees
+Sell Transaction:
+The Quantity and Unit Price remain as input by the user.
+
+The total cash received is:
+
+mathematica
+Copia
+Modifica
+Total Sell = (Quantity × Unit Price) – Fees
+Impact on calculations:
+Calculation	Behavior
+Average Price	Always based on Unit Price, not affected by fees
+Market Value (book value)	Sum of all (buy amounts – fees) minus all (sell amounts – fees)
+P&L	Use the current price × quantity minus the adjusted book value
+
+3️⃣ Summary of Actions
+Feature	Action
+Asset Edit Modal	Pre-fill Asset Name and Ticker with stored values
+Fee Logic	Deduct fees from total transaction value but keep unit price unchanged
+
+Example Scenario – Buy Case
+Action	Example
+Buy	1 share at €10
+Fee	€1
+Total Invested	€9 (10 – 1)
+Average Price	€10
+
+Final instruction to Replit AI:
+Update the current project to implement these changes.
+Ensure the Edit Asset modal is fully pre-filled, and buy/sell transactions correctly account for fees in total invested/received amounts while maintaining accurate unit price tracking.
+
+Test the full flow including buys, sells, P&L calculations, and editing assets.

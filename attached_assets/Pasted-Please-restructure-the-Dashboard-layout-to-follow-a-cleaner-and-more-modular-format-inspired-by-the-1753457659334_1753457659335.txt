@@ -1,0 +1,74 @@
+Please restructure the Dashboard layout to follow a cleaner and more modular format, inspired by the portfolio reference provided.
+Here’s exactly what I need:
+
+🔝 1. Replace “Portfolio Summary” Box with Individual Cards
+Remove the single combined "Portfolio Summary" card currently in the middle section.
+
+Instead, display each metric as a separate card, similar to the top-level style already used for:
+
+Net Worth
+
+Portfolio Value
+
+Total Deposited
+
+Unrealized P&L
+
+Realized P&L
+
+Each card should include:
+
+Label
+
+Value
+
+Optional subtext (e.g., “Open positions”, “Money invested”)
+
+Colored icon matching the existing theme
+
+Ensure spacing and height are consistent across all 5 cards in a single row.
+
+📊 2. Add 3 Donut Charts
+Add the following charts exactly like in the reference screenshot:
+
+a. Asset Type Allocation
+Donut chart showing allocation between:
+
+Stocks
+
+ETFs
+
+Crypto
+
+Bonds/Funds
+
+Central label: Total Portfolio Value
+
+Use the same color scheme used in Holdings and Line Graph
+
+b. Stocks / ETFs / Bonds Holdings Allocation
+Donut chart showing individual stocks, ETFs, or funds held
+
+Include a full-color legend listing each asset name and percentage
+
+Data source: current holdings in those categories
+
+c. Crypto Holdings Allocation
+Donut chart showing crypto holdings by percentage
+
+Full-color legend below or beside the chart
+
+Data source: current crypto assets in Holdings
+
+All three charts should use consistent dimensions, spacing, and font styling. Position them in a responsive grid below the top cards.
+
+🎯 Design Requirements:
+The top area of the dashboard should only include the 5 individual cards listed above — no combined summary blocks.
+
+Below the cards: show the donut charts in a clean 2x2 layout or stacked vertically depending on screen size.
+
+The section for Top & Bottom Performers and the existing Portfolio Performance graph should stay visible at the bottom.
+
+Match the minimal, clean look shown in the provided portfolio tracker image (rounded cards, shadow, consistent spacing).
+
+Let me know which files or component logic need to be updated to handle this layout, and how the chart data should be structured or passed from Holdings.

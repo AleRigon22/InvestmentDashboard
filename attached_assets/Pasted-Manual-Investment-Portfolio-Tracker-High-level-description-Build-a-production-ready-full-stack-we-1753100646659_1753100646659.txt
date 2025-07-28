@@ -1,0 +1,210 @@
+Manual Investment Portfolio Tracker
+
+High-level description:
+Build a production-ready, full-stack web application that allows multiple private investors to record, track, and monitor their personal investment portfolios, including:
+
+Stock, ETF, Fund, and Crypto holdings
+
+Buy/Sell transactions
+
+Monthly manual price updates
+
+Dividend payments
+
+Cash deposits and withdrawals
+
+Key difference:
+All data is entered manually by the user.
+There is no real-time market data integration.
+
+Each user has a private and independent portfolio protected by login credentials.
+
+Architecture:
+Backend: Node.js (TypeScript) API
+
+Frontend: React (TypeScript) SPA
+
+Database: PostgreSQL (Replit’s built-in DB)
+
+Authentication: Simple username + password (JWT or session-based)
+
+Functional requirements
+Data model (PostgreSQL) – Six tables
+Table	Columns	Notes
+users	id PK, username (unique), password_hash	Manages login/registration
+assets	id PK, name, ticker, isin, category (stock | etf | fund | crypto), sector, region, currency	Static master list, added manually by user
+transactions	id PK, user_id FK, asset_id FK, date, type (buy | sell), quantity, unit_price, fees	Historical trades per user
+prices	id PK, user_id FK, asset_id FK, date, close_price	Manually entered monthly prices
+dividends	id PK, user_id FK, asset_id FK, ex_date, payment_date, amount, currency	Dividend cash-flow per user
+cash_movements	id PK, user_id FK, date, type (deposit | withdraw), amount, currency	Tracks deposits/withdrawals per user
+
+API (Express + TypeScript)
+Authentication:
+/auth/register – Create user (username + password)
+
+/auth/login – Get access token
+
+Users can only access and manage their own data.
+
+CRUD endpoints for all tables:
+/assets – Create, read, update, delete (manual input only)
+
+/transactions – Buy/Sell management
+
+/prices – Manual price entries (no automatic updates)
+
+/dividends – Add dividends manually
+
+/cash – Manage deposits and withdrawals
+
+Aggregate endpoints:
+/portfolio/overview –
+
+Current market value (quantity × last entered price)
+
+Cost basis (sum of buys)
+
+Profit & Loss (absolute and %)
+
+Allocation by category, sector, region
+
+/dividends/summary –
+
+YTD dividends
+
+List of past dividends per asset
+
+Monthly dividend flow
+
+Frontend (React + Vite + TypeScript)
+Pages & Components:
+Login & Registration Page
+
+Username + Password form
+
+JWT/session-based authentication
+
+Dashboard
+
+Portfolio Value over Time:
+
+Two-line graph:
+
+Line 1: Portfolio value (based on manually entered prices)
+
+Line 2: Cumulative deposits
+
+Pie Charts:
+
+Allocation by Category (Stock/ETF/Fund/Crypto)
+
+Allocation by Sector
+
+Allocation by Region
+
+KPIs:
+
+Current value
+
+Cost basis
+
+P/L %
+
+Dividends YTD
+
+Holdings Table
+
+List of positions with:
+
+Quantity
+
+Avg purchase price
+
+Last price (manual)
+
+Market value
+
+P/L (absolute and %)
+
+Quick actions: Buy, Sell, Edit
+
+Transactions Page
+
+Form to add/edit trades
+
+History of operations
+
+Dividends Page
+
+Stacked bar chart of monthly dividends
+
+List of dividend payments
+
+Manual dividend entry form
+
+Cash Movements Page
+
+Deposit / Withdraw management
+
+Cash balance tracking
+
+Design and Interaction
+Charts:
+
+All charts are dynamic and update in real time based on user input
+
+Rounded bars and smoothed lines for a clean, soft aesthetic
+
+Use intuitive colors and legends
+
+Forms:
+
+Validated and user-friendly input for all data entries
+
+Manual asset and price management only
+
+Navigation:
+
+Bottom Nav: Dashboard | Holdings | Transactions | Dividends | Cash
+
+Clear separation of pages
+
+No overlapping features
+
+Testing & Tooling
+API: Jest + Supertest
+
+Frontend: React Testing Library
+
+Code Quality: ESLint + Prettier + Husky pre-commit hooks
+
+Deployment & Scripts
+One-click Run starts both API and frontend concurrently
+
+Build scripts: Production build with npm run build
+
+Seed script: Optionally populate initial empty data structure per user
+
+Deliverables
+Fully scaffolded monorepo with /server and /client folders
+
+Working CRUD, authentication, and user-based data segregation
+
+All charts and calculations driven only by user-entered data
+
+.replit file pre-configured to run dev servers concurrently
+
+Clear README.md with setup instructions and API documentation
+
+Inline TODOs for future extensions (e.g., tax reports, data import/export)
+
+Important Notes
+NO live pricing.
+
+NO automatic updates.
+
+ALL data is managed manually by the user.
+
+Final instruction to Replit AI:
+Generate this project with all boilerplate, schema migrations, REST endpoints, React pages, authentication, and example components pre-wired.
+Ensure the code compiles and the "Run" button launches the app end-to-end in Replit.

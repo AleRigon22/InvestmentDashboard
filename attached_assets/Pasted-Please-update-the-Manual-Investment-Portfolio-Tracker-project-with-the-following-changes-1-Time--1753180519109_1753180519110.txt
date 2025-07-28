@@ -1,0 +1,63 @@
+Please update the Manual Investment Portfolio Tracker project with the following changes:
+
+1️⃣ Time Range Selector – Graph Filtering Fix
+Current issue:
+The time range dropdown shows correct options (3M, 6M, YTD, Max), but the graphs do not respond correctly when selecting 3M or 6M.
+
+Required fix:
+Ensure that selecting 3M or 6M correctly filters the data in all graphs, including:
+
+Dashboard graph
+
+History graph
+
+The graphs must:
+
+Show only the data points corresponding to the selected range.
+
+Auto-scale the Y-axis to the filtered data set (no 0-only axis).
+
+Update in real time without needing a page refresh.
+
+2️⃣ Login Redirect – Fix Immediate Navigation
+Current issue:
+After logging in, the app still requires a manual refresh to navigate to the Dashboard.
+
+Required fix:
+On successful login:
+
+Immediately redirect the user to the Dashboard (Portfolio Overview page) without requiring manual page refresh.
+
+Use standard React navigation (e.g., navigate("/dashboard")).
+
+Ensure session/token saving happens before redirecting.
+
+3️⃣ Current Price Edit – Remove Dollar Button and Use Modal
+Current issue:
+Currently, there is a blue dollar button to edit the Current Price. This is inconsistent with the rest of the UI.
+
+Required fix:
+Remove the blue dollar button from the Holdings table.
+
+Implement this behavior:
+
+Action	Behavior
+Click on Current Price	Open a popup/modal (same style as other modals in the app)
+Inside the modal:	Input field to enter the new Current Price
+Buttons:	Confirm and Cancel
+After saving:	Update the Current Price, recalculate Market Value and P&L immediately
+
+Do not link the Current Price to any transaction date; it remains a manual value.
+
+4️⃣ Summary of Actions
+Feature	Action
+Graph Filtering	Fix 3M and 6M filtering in Dashboard and History graphs
+Login Redirect	Ensure immediate navigation to Dashboard after login
+Current Price Edit	Remove dollar button; enable click-to-edit with popup modal
+
+Final instruction to Replit AI:
+Apply these changes directly to the current project.
+Ensure time range filtering, login flow, and Current Price editing are fully functional and consistent with the rest of the app UX.
+
+Test the full flow including login, graph interactions, and asset editing.
+

@@ -1,0 +1,75 @@
+Please apply the following fixes to the Manual Investment Portfolio Tracker project:
+
+1️⃣ Sell Action – Fix the Sell Flow
+Current issue:
+When trying to sell an asset, the Sell action (– button) does not work properly.
+
+Required fix:
+
+Open a Sell Transaction Modal when the user clicks – on an asset in Holdings.
+
+The modal must include:
+
+Asset name and ticker (pre-filled, not editable).
+
+Quantity to sell (input by user, must be ≤ current quantity).
+
+Unit price of the sale (input by user).
+
+Fees (optional input).
+
+Date of transaction (default to today, editable).
+
+Validation rules:
+
+Cannot sell more than the current quantity.
+
+Quantity > 0.
+
+After saving:
+
+Decrease the asset's quantity.
+
+Adjust the Market Value (book value).
+
+Update P&L calculations.
+
+If 100% of the quantity is sold, mark the asset as closed but keep it in the list for historical purposes (show in "Closed Positions").
+
+Handle updates immediately in the UI (no page reload required).
+
+2️⃣ Edit Action – Pre-Fill All Fields with Existing Data
+Current issue:
+When clicking Edit (✏️) on an asset, the modal opens with empty fields or placeholders instead of pre-filled values.
+
+Required fix:
+
+When the user clicks Edit, the modal must display all current data pre-filled, not placeholders.
+
+Fields to pre-fill:
+
+Field	Pre-filled?
+Asset Name	✅
+Ticker	✅
+Category	✅
+Sector	✅
+Region	✅
+Currency	✅
+Quantity	✅
+Average Price	✅
+Current Price	✅
+Market Value	✅
+
+Allow the user to update any of these fields and save changes.
+
+After saving, refresh the Holdings table and recalculate all impacted metrics (Market Value, P&L, etc.).
+
+3️⃣ Summary of Required Changes
+Feature	Action
+Sell Action	Fix the Sell modal and logic. Handle partial and full sales correctly.
+Edit Action	Pre-fill all fields in the Edit modal with existing data. No placeholders.
+
+Final instruction to Replit AI:
+Update the existing project with these fixes.
+Ensure the Sell and Edit modals are fully functional, with proper data binding, validations, and UI updates.
+Test for both partial sales, full asset closures, and asset edits.

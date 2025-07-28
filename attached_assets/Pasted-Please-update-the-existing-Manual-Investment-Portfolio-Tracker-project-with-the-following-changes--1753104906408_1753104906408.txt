@@ -1,0 +1,109 @@
+Please update the existing Manual Investment Portfolio Tracker project with the following changes:
+
+1️⃣ Holdings Page – Action Buttons
+Current issue:
+The action buttons (+, –, ✏️) in the Holdings table do not work properly.
+
+Required fixes:
+
+Edit (✏️):
+
+When clicking on the edit icon, allow the user to modify all asset fields:
+
+Name
+
+Ticker
+
+Category
+
+Sector
+
+Region
+
+Currency
+
+Average Price
+
+Quantity
+
+Notes
+
+Save changes and update calculations accordingly.
+
+Buy (+):
+
+Open a "New Buy Transaction" modal pre-filled with the selected asset.
+
+Fields required:
+
+Quantity
+
+Unit Price
+
+Date
+
+Fees
+
+Sell (–):
+
+Open a "New Sell Transaction" modal pre-filled with the selected asset.
+
+Fields required:
+
+Quantity
+
+Unit Price
+
+Date
+
+Fees
+
+After saving a transaction, update the Holdings table immediately (quantity, average price, market value, P/L).
+
+2️⃣ Fix Market Value and P/L Calculation
+Current issue:
+After adding a Buy Transaction, the system displays $0.00 market value and -100% P/L even if assets are present.
+
+Required behavior:
+
+Market Value = Quantity × Last Price
+
+P/L = (Last Price – Avg Price) × Quantity
+
+P/L % = ((Last Price / Avg Price) – 1) × 100
+
+Additional rule:
+
+If Last Price is not yet entered by the user, default it to 0 but allow the user to add it manually.
+
+When Last Price is zero, display “Price Missing” warning instead of calculating P/L to avoid misleading values.
+
+3️⃣ Unique Color and Icon per Asset
+New requirement:
+
+Each asset must display a different icon and color in the Holdings table.
+
+Example mapping (for inspiration):
+
+Asset Category	Icon	Color
+Stocks	📈	Blue
+ETFs	📊	Green
+Crypto	🪙	Orange
+Bonds	💵	Purple
+Cash	💰	Grey
+
+Icons and colors should be visually consistent across the app (Holdings, Charts, Dividends).
+
+Use category-specific icons or fallback to initials if no icon is available.
+
+4️⃣ Summary of Actions
+Area	Action
+Holdings Actions	Fix + / – / Edit buttons to open the correct modals and handle data updates
+Transactions	Ensure buy/sell correctly update quantity, avg price, market value, and P/L
+Market Value	Fix calculations and show warning when prices are missing
+Visuals	Add unique color and icon per asset
+
+Final instruction to Replit AI:
+Apply these changes directly to the existing project.
+Ensure the Holdings page becomes fully interactive, the P/L and Market Value calculations are correct, and the visual design is clear and intuitive.
+Test the full flow end-to-end.

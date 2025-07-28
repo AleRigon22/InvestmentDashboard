@@ -1,0 +1,90 @@
+You are working on an investment tracking web application. Please make the following UI/UX and functionality improvements to the individual asset detail page (the page that opens when clicking on the magnifying glass icon from the Holdings page):
+🔧 1. BUTTON FUNCTIONALITY FIX
+
+    The top buttons Edit Asset, Add Transaction, and Add Dividend must be contextual.
+
+    If the user is on the detail page of a specific asset (e.g., Ethereum), clicking:
+
+        Add Transaction should open the modal pre-filled with this asset, and the asset selection dropdown should be disabled or hidden.
+
+        Add Dividend must directly add a dividend for this asset without asking the user to select the asset again.
+
+🎯 2. KPI Block Improvements
+
+    Ensure data is clearly labeled:
+
+        Total Invested: indicate if it includes fees (add info tooltip).
+
+        Market Value: if it's €0, display a note like: "This asset has been fully sold."
+
+    Group the blocks for visual balance and responsiveness.
+
+📊 3. Chart Improvements – Investment Performance
+
+    Fix the tooltip that currently displays both lines as Market Value.
+
+        Rename one line to “Invested Value”.
+
+    Color Suggestions:
+
+        Invested Value → Blue
+
+        Market Value → Green
+
+    Always show the legend, not only on hover.
+
+    Y-axis should use currency formatting (e.g., €1,000).
+
+    Add toggle (optional): “€ vs % Performance” for users to view relative growth.
+
+📉 4. Asset Sold Feedback
+
+    When the user has completely sold the asset:
+
+        Show a status banner like: This asset was sold on [DATE].
+
+        Optionally grey out KPIs like Market Value, Unrealized P&L.
+
+🧾 5. Transaction History Enhancements
+
+    Sort transactions by newest first.
+
+    Add color-coded tags:
+
+        BUY → blue, SELL → red, DIVIDEND → green.
+
+    Add summary row:
+
+        Total Invested, Total Sold, Realized P&L.
+
+🗒️ 6. Personal Notes
+
+    Keep editable field but improve UI with:
+
+        Optional “Strategy Tag” selector (e.g., Long-term, Growth, Passive Income).
+
+        Allow uploading small notes or screenshots (PDF or image upload – optional).
+
+📱 7. Mobile Optimization
+
+    Chart must be scrollable horizontally on small screens.
+
+    Break up content into tabs or collapsible blocks:
+
+        e.g. “Performance” / “Transactions” / “Notes”.
+
+    KPIs should wrap into two rows, 2–3 per row max.
+
+🧠 8. Accessibility & Clarity
+
+    Add tooltips to all icons and abbreviations (e.g., P&L, avg. price).
+
+    Use icons and color indicators to highlight positive or negative performance.
+
+💡 Additional Enhancements
+
+    Fix the Edit Asset modal to load correct data contextually.
+
+    Add support for dynamically updating the chart upon adding new transactions without requiring page reload.
+
+Apply all changes ensuring smooth animation, responsive layout, clean UX, and future extensibility. Let me know if you want this also translated in Italian or split into modular prompts.

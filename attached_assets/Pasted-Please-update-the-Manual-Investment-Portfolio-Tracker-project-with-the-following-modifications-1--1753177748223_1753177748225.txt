@@ -1,0 +1,148 @@
+Please update the Manual Investment Portfolio Tracker project with the following modifications:
+
+1️⃣ Dashboard Graph – Align with History Page Graph
+Current issue:
+The Dashboard graph and the History page graph use different structures.
+
+Required fix:
+Make the Dashboard graph identical to the History graph, using the same structure as the example provided (multi-line by category).
+
+Categories to display:
+
+Line	Represents
+ETF	Total ETF value over time
+Stocks	Total stock value over time
+Crypto	Total crypto value over time
+Bonds/Funds	Total bond/fund value over time
+
+Data Source:
+Both graphs (Dashboard and History) must pull their data directly from the snapshots stored in the History page.
+
+2️⃣ P&L Formatting – Add Negative Sign
+Current issue:
+When P&L is negative, it does not display a minus sign clearly.
+
+Required fix:
+Format the P&L values so that:
+
+Condition	Display
+Positive	+€x.xx
+Negative	–€x.xx (with minus sign)
+
+Apply this formatting to:
+
+Holdings P&L
+
+History P&L
+
+Dashboard P&L
+
+3️⃣ Holdings – Enable Full Edit of Data
+Current issue:
+Holdings data is not editable in full, or changes are not saved properly.
+
+Required fix:
+Allow editing of all relevant fields in Holdings:
+
+Asset Name
+
+Ticker
+
+Category (Stocks, ETF, Crypto, Bonds/Funds)
+
+Sector
+
+Region
+
+Currency
+
+Quantity
+
+Average Price
+
+Current Price
+
+Pre-fill all fields with existing values.
+
+Save the updated data and recalculate Market Value and P&L immediately.
+
+4️⃣ Fix Current Price Edit
+Current issue:
+Editing the Current Price does not update the data.
+
+Required fix:
+Ensure that when the Current Price is edited:
+
+The new price is saved correctly.
+
+The system recalculates:
+
+Market Value = Current Price × Quantity
+
+Unrealized P&L = Market Value – Book Value
+
+Reflect the changes in:
+
+Holdings Table
+
+Dashboard
+
+Asset Detail Page (if present)
+
+5️⃣ Edit Portfolio Snapshot – Month Selection Dropdown
+Current issue:
+When editing a snapshot, the month is shown as a number input.
+
+Required fix:
+Replace the number field with a dropdown menu listing the months by name:
+
+Value	Label
+01	Gennaio
+02	Febbraio
+03	Marzo
+04	Aprile
+05	Maggio
+06	Giugno
+07	Luglio
+08	Agosto
+09	Settembre
+10	Ottobre
+11	Novembre
+12	Dicembre
+
+The year remains a separate dropdown or field.
+
+6️⃣ Snapshot Data – Save 4 Asset Categories
+Current issue:
+When saving snapshots, the system does not store the current value of each asset category (Stocks, ETF, Crypto, Bonds).
+
+Required fix:
+Each snapshot must include:
+
+Field	Data
+Stocks Value	Total value of stocks at snapshot date
+ETF Value	Total value of ETFs
+Crypto Value	Total value of crypto
+Bonds/Funds Value	Total value of bonds/funds
+
+This data must be saved in each snapshot and used for:
+
+History graphs
+
+Dashboard graphs
+
+Performance analysis
+
+7️⃣ Summary of Actions
+Feature	Action
+Dashboard Graph	Replace with the multi-line category graph, identical to History
+P&L Formatting	Display negative P&L with a clear – sign
+Holdings Edit	Allow full editing of holdings data
+Current Price	Fix edit/save logic and recalculate values
+Snapshot Edit	Use a month name dropdown instead of numeric input
+Snapshot Save	Save per-category values (Stocks, ETF, Crypto, Bonds) in all snapshots
+
+Final instruction to Replit AI:
+Apply these changes to the current project.
+Ensure that the graphs, holdings management, snapshot system, and calculations work consistently and as described.
+Test the full flow for data editing, snapshot management, and historical reporting.

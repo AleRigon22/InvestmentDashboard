@@ -1,0 +1,48 @@
+1. **Automated Testing**  
+   - Add Jest unit and integration tests for backend modules (authentication, storage) and React Testing Library tests for core UI components.  
+   - Ensure at least 80% coverage on critical paths.
+
+2. **API Documentation & Contracts**  
+   - Generate an OpenAPI/Swagger specification automatically from Zod schemas, serve it at `/docs`, and include a Postman collection.
+
+3. **Centralized Error Handling & Logging**  
+   - Create an Express error‐handling middleware that normalizes Zod errors and runtime exceptions into a consistent JSON format `{ code, message, details }`.  
+   - Integrate structured logging with Winston or Pino, tagging all requests and errors with context.
+
+4. **Security & Performance Hardening**  
+   - Apply Helmet for secure HTTP headers and express‐rate‐limit on auth and high‐risk endpoints.  
+   - Enable gzip compression and configure server‐side or CDN caching for static assets.
+
+5. **CI/CD Pipeline**  
+   - Configure GitHub Actions (or equivalent) to run ESLint+Prettier linting, tests, type‐checks, and production builds on push.  
+   - Validate required environment variables at startup.
+
+6. **Database Versioning & Scalability**  
+   - Introduce Drizzle migrations for versioning the Postgres schema.  
+   - Configure connection pooling (pg‐pool) for production workloads.
+
+7. **Design System & Theming**  
+   - Define a Tailwind theme with custom color palette and typography scale.  
+   - Extract reusable UI components (Button, Card, Input) as design tokens.
+
+8. **Dashboard & UI Enhancements**  
+   - Add dynamic, filterable charts (e.g. with Recharts) showing portfolio history, asset breakdown, and snapshot timelines, including custom tooltips.  
+   - Implement light/dark theme toggling with Tailwind’s `dark:` variants and persist user preference.
+
+9. **Responsive & Mobile-First Layout**  
+   - Audit and optimize all pages for mobile breakpoints (320–480 px).  
+   - Convert the sidebar/navbar into a collapsible drawer on small screens.
+
+10. **Accessibility (a11y)**  
+    - Ensure all interactive elements have appropriate `aria-` attributes, high contrast ratios, and keyboard operability.  
+    - Enforce accessibility with `eslint-plugin-jsx-a11y`.
+
+11. **Onboarding & User Guidance**  
+    - Integrate a first-visit guided tour (e.g. using `react-joyride`) to explain main dashboard features.  
+    - Provide contextual tooltips and friendly empty-state messages for each section.
+
+12. **Inline Feedback & Notifications**  
+    - Implement inline form validation with clear error messages.  
+    - Add toast notifications for success and error events (e.g. using shadcn/ui or react-toastify).
+
+Please structure your changes into separate commits or branches for each numbered area, include clear README updates explaining how to run tests, view docs, toggle themes, and deploy via CI/CD, and verify everything works in the Replit development environment.

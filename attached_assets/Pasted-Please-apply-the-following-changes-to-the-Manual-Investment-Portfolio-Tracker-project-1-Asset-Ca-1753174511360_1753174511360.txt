@@ -1,0 +1,134 @@
+Please apply the following changes to the Manual Investment Portfolio Tracker project:
+
+1️⃣ Asset Categorization – Standardize Across Holdings, History, and Graphs
+Required categories:
+All assets must be grouped into the following 4 categories consistently across the entire app:
+
+Category	Example Assets
+Stocks	Apple, Nvidia, Tesla, etc.
+ETF	S&P500, MSCI World, Nasdaq100 ETF
+Crypto	Bitcoin, Ethereum
+Bonds / Funds	Treasury Bonds, Vanguard Funds, etc.
+
+Holdings Page Behavior:
+Open Positions:
+
+Divide into 4 sections: Stocks, ETFs, Crypto, Bonds/Funds
+
+Closed Positions:
+
+Same subdivision into Stocks, ETFs, Crypto, Bonds/Funds
+
+Each closed cycle must be shown separately (buy→sell flow)
+
+Graph Integration:
+All charts that reference asset allocations or values must use this categorization:
+
+Monthly Performance Graphs
+
+Asset Allocation Charts
+
+History Section Graphs
+
+Each category must have a separate line in the graph showing its historical value over time.
+
+2️⃣ Snapshots – Save and Manage Category Values
+When saving a snapshot:
+Store the total current value for each category at that moment:
+
+Stocks Value
+
+ETF Value
+
+Crypto Value
+
+Bonds/Funds Value
+
+Inside each category, save the list of assets and their individual values at the time of the snapshot (for detailed historical view).
+
+Example snapshot data structure:
+json
+Copia
+Modifica
+{
+  "month": "03/2025",
+  "total_deposit": 30000,
+  "categories": {
+    "Stocks": {
+      "total_value": 12000,
+      "assets": {
+        "Apple": 4000,
+        "Nvidia": 3000,
+        "Tesla": 5000
+      }
+    },
+    "ETF": {
+      "total_value": 10000,
+      "assets": {
+        "S&P500": 7000,
+        "MSCI World": 3000
+      }
+    },
+    "Crypto": {
+      "total_value": 5000,
+      "assets": {
+        "Bitcoin": 4000,
+        "Ethereum": 1000
+      }
+    },
+    "Bonds": {
+      "total_value": 3000,
+      "assets": {
+        "Treasury Bond": 3000
+      }
+    }
+  }
+}
+3️⃣ Snapshots – Edit and Delete
+Required functionality:
+Edit Snapshot:
+
+Allow the user to modify an existing snapshot.
+
+Editable fields:
+
+Category values (Stocks, ETF, Crypto, Bonds)
+
+Individual asset values within each category
+
+Deposits for the month
+
+Delete Snapshot:
+
+Allow the user to delete a snapshot from the History section.
+
+Confirm deletion with a modal popup before removing.
+
+4️⃣ History Graph – Category Focused
+Graph logic:
+
+For the History section, show the historical evolution of each asset category separately.
+
+Remove P/L line.
+
+Lines to include:
+
+Line	Data
+Deposits	Cumulative deposited capital
+Stocks	Historical stocks value
+ETFs	Historical ETFs value
+Crypto	Historical crypto value
+Bonds/Funds	Historical bonds/funds value
+
+5️⃣ Summary of Actions
+Feature	Action
+Holdings Page	Divide open/closed positions into Stocks, ETF, Crypto, Bonds/Funds
+Snapshots	Save detailed per-category values and list of assets
+Snapshots Edit/Delete	Allow editing and deletion of snapshots
+Graphs	Use 4 category lines in History graphs; remove P/L line
+History	Display both aggregated categories and individual assets per month
+
+Final instruction to Replit AI:
+Apply these changes to the current project.
+Ensure consistent categorization of assets, correct snapshot storage, and clear separation in UI/graphs between Stocks, ETF, Crypto, and Bonds.
+Test snapshot creation, editing, deletion, and the historical visualization of categories.

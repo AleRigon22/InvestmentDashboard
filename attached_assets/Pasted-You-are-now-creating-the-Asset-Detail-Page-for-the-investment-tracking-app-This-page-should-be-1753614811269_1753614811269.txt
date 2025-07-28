@@ -1,0 +1,99 @@
+You are now creating the **Asset Detail Page** for the investment tracking app.
+
+This page should be accessible by clicking the magnifying glass (🔍) icon next to any asset listed in the Holdings page. It should show personalized, detailed data related only to that specific asset, including investment history, performance, dividends, and notes.
+
+Follow the layout and behavior described below:
+
+---
+
+🔗 ROUTE & ACCESS
+- The page should be accessible at a route like: `/asset/:symbol`
+- Triggered from the Holdings page when the magnifying glass icon is clicked
+- Each asset has its own unique page
+
+---
+
+🧱 HEADER SECTION
+- Show:
+  - Asset name (e.g. Apple Inc.)
+  - Ticker symbol (e.g. AAPL)
+  - Asset type/category (e.g. Stock, Crypto)
+  - Status tag: “Active” or “Closed”
+  - Asset logo/icon
+
+---
+
+📊 KPI OVERVIEW (2 ROWS, 3 COLUMNS)
+- Display the following in two clear rows:
+  - Row 1:
+    - **Total Invested**
+    - **Quantity Held**
+    - **Market Value**
+  - Row 2:
+    - **Average Buy Price**
+    - **Realized P&L** (only if sell transactions exist)
+    - **Unrealized P&L** (if asset is still held)
+
+- Also display: **% of Portfolio Weight** (optional small badge or tooltip)
+
+---
+
+📈 PERFORMANCE CHART (LINE GRAPH)
+- A line chart showing the user’s personal investment performance in this asset
+  - **Line 1**: Cumulative invested capital over time
+  - **Line 2**: Market value of the asset over time
+- X-axis: date
+- Y-axis: amount in €
+- Time range options: 1M, 3M, 1Y, MAX
+- Tooltip should show data points for both lines per date
+
+---
+
+📊 DIVIDEND CHART (if applicable)
+- Bar chart of monthly dividends received from this asset
+  - One column per month
+  - Tooltip on each column showing date and dividend amount
+- This block should be hidden if no dividends are recorded
+
+---
+
+🧾 TRANSACTION HISTORY TABLE
+- List all transactions for this asset only:
+  - Date | Type (Buy/Sell) | Quantity | Price | Total | Fees
+- Allow optional sorting by date or amount
+- Responsive layout for mobile (horizontal scroll if needed)
+
+---
+
+📝 NOTES SECTION
+- Add a “Personal Notes” block for the user to add/edit a free-form note for this asset
+  - Example use: "Bought after strong earnings report"
+- Save the note locally in user data
+
+---
+
+⏳ CLOSED POSITION DATA (if applicable)
+- If the asset is closed (fully sold), display:
+  - Total holding duration (e.g. "206 days")
+  - Start and end date
+  - Final Realized P&L
+
+---
+
+🛠️ ACTIONS
+- Buttons or icons for:
+  - Edit Asset
+  - Add Transaction
+  - Add Dividend
+  - Delete Asset (with confirmation)
+
+---
+
+📱 MOBILE RESPONSIVENESS
+- Stack KPI blocks vertically
+- Make charts full-width and scrollable if necessary
+- Keep navigation and header visible on smaller screens
+
+---
+
+Do not modify other pages (Holdings, Dashboard, Trades, etc.). Use existing data and routing structure when possible. Ensure styling matches the rest of the application.

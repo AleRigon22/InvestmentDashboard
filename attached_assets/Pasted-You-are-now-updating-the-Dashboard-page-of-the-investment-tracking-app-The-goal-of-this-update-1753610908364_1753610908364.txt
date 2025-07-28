@@ -1,0 +1,52 @@
+You are now updating the **Dashboard page** of the investment tracking app.
+
+The goal of this update is to refine the layout and usability of the top KPI section and ensure consistency in the naming of pie charts for better visual coherence and clarity.
+
+Apply the following improvements only to the Dashboard page:
+
+---
+
+📐 KPI Layout Improvements:
+1. Reduce the number of visible KPI blocks at the top to ensure better layout symmetry and readability.
+
+2. Specifically:
+   - **Remove the "Total Fees" card** from the main dashboard view.
+   - Optionally, relocate the "Total Fees Paid" value to the Trades page or under Recent Transactions as a secondary detail.
+   - The key KPIs to keep in the top row are:
+     - Total Value
+     - Cost Basis
+     - Total P&L
+     - Realized P&L
+     - Unrealized P&L
+     - Total Dividends
+
+3. Alternatively, consider reorganizing the 7 KPI cards into **two rows**:
+   - Row 1: Total Value, Cost Basis, Total P&L, Total Dividends
+   - Row 2: Realized P&L, Unrealized P&L, Total Fees (optional and smaller)
+
+4. Ensure all KPI cards maintain consistent spacing, alignment, and icon style. On mobile view, cards should stack or become scrollable horizontally.
+
+---
+
+💬 Tooltip Enhancement:
+5. Add a tooltip (on hover) for each KPI block with a short explanation of the metric and how it’s calculated.
+   - Example for Total P&L: “Sum of realized and unrealized gains, minus fees, plus dividends.”
+
+---
+
+📊 Chart Titles Consistency:
+6. Unify and standardize the titles of the three pie charts below the performance graph:
+   - "Asset Allocation" (general)
+   - "Stocks / ETFs / Bonds Allocation"
+   - Rename "Crypto Holdings" to **"Crypto Allocation"**
+
+7. Use consistent capitalization and structure across all three:
+   - Format: **[Asset Type] Allocation**
+   - Ensure spacing and font size are uniform
+
+---
+
+🛠️ Visual & UX Notes:
+- Keep all existing data logic intact
+- Do not alter other pages (Trades, Holdings, Dividends, History)
+- Maintain responsiveness across screen sizes, especially mobile

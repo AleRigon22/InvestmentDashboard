@@ -1,0 +1,81 @@
+Please update the Manual Investment Portfolio Tracker project with the following changes:
+
+1️⃣ Current Price – Simplify Editing Flow
+Current issue:
+Current Price is edited via a separate button, and may be linked incorrectly to transaction dates.
+
+Required fix:
+Remove the dedicated "Edit Current Price" button.
+
+Make the Current Price directly editable by:
+
+Clicking directly on the Current Price field in the Holdings table (inline edit).
+
+Using the Edit Asset modal, where Current Price is part of the asset data.
+
+Do not link Current Price to any date.
+It is just a manual value, editable at any moment without historical tracking.
+
+2️⃣ Accordion UI – Remove Hover Effect
+Current issue:
+In the Snapshot accordion, the category rows have a light blue background and the hover state changes the opacity, making the UI inconsistent.
+
+Required fix:
+Make the category rows in the accordion always white, no background color change.
+
+Remove any hover effect that changes the color or opacity.
+
+Keep the design clean and consistent with the rest of the app.
+
+3️⃣ Snapshots – Prevent Fake Values for Empty Categories
+Current issue:
+If a category has no assets, the system currently inserts fake placeholder values.
+
+Required fix:
+When there are no assets in a category, show:
+
+Field	Value
+Total Value	0
+Invested	0
+P&L (€)	0
+P&L (%)	0%
+
+Do not insert any artificial data. Categories without assets must display zero values by default.
+
+4️⃣ Graph Time Range – Fix Dropdown Functionality
+Current issue:
+The time range dropdown in both Dashboard and History graphs is non-functional.
+
+Required fix:
+Remove the 1M option.
+
+Implement these ranges:
+
+Option	Behavior
+3M	Show last 3 months
+6M	Show last 6 months
+YTD	Show data from Jan 1st of current year
+Max	Show all historical data
+
+When the user selects a range, the graph must:
+
+Filter the data points immediately
+
+Auto-scale the Y-axis correctly
+
+Update without requiring a page refresh
+
+Apply this fix to both the Dashboard graph and the History graph.
+
+5️⃣ Summary of Actions
+Feature	Action
+Current Price Edit	Remove button; allow inline edit or via Edit Asset modal
+Accordion UI	Remove hover effect and light blue background; use white background always
+Snapshot Zero Values	Show 0 values for categories with no assets; no placeholders
+Graph Time Range	Fix dropdown to use 3M, 6M, YTD, Max; filter data correctly
+
+Final instruction to Replit AI:
+Apply these changes directly to the current project.
+Ensure the Holdings, Snapshot accordion, and Portfolio graphs are fully consistent and user-friendly.
+Test inline editing, snapshot display, and graph interaction across all flows.
+

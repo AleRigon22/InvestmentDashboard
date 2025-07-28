@@ -1,0 +1,31 @@
+In the "Single Asset" page for open positions, revise the **Investment Performance chart** to ensure it is fully accurate and dynamically reflects the historical snapshot data below.
+
+Here’s what to fix and implement:
+
+### 1. Chart data source
+- The chart (both in **Currency** and **Percentage** mode) must pull its data **entirely from the "Historical Snapshots" table below**.
+- Every row of the Historical Snapshots represents a saved monthly data point. These values (Quantity, Avg. Price, Current Price, Total Cost, Market Value, P&L) must directly feed the chart lines.
+
+### 2. Chart behavior
+- In **Currency** mode:
+  - The **"Invested Value" (blue)** line must use the `Total Cost` field from each snapshot.
+  - The **"Market Value" (green)** line must use the `Market Value` field from each snapshot.
+  - Correct the tooltip: currently both lines show "Market Value". One should be "Invested Value" and the other "Market Value".
+- In **Percentage** mode:
+  - Display only **one line**, starting at 0% (baseline), using the **percentage P&L change** from the `P&L` field in each snapshot (e.g. `+3.23%`, `+9.68%`).
+  - Tooltip should show the percentage performance for the selected point.
+
+### 3. Chart display logic
+- On chart load, auto-generate the chart dynamically from the historical snapshot array without hardcoded values.
+- If the user switches timeframes (1M, 3M, 1Y, MAX), filter the data points accordingly from the snapshots.
+- On hover, ensure the tooltip correctly shows the values from that date’s snapshot.
+
+### 4. Visual sync
+- Whenever a snapshot is edited, deleted or added, the chart must re-render and update immediately.
+- Chart must not display lines starting from 0€, but from the actual `Total Cost` and `Market Value` of the first snapshot.
+- Fix spacing and axis scale if necessary to accommodate small deltas correctly.
+
+### 5. Labeling fix
+- In **Currency mode**, fix the tooltip bug: currently, both lines are named “Market Value”. Change the blue one to “Invested Value”.
+
+Keep the existing layout and styling, but improve responsiveness and clarity. Ensure data and visuals stay in perfect sync.
