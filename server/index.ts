@@ -18,10 +18,10 @@ app.use((req, res, next) => {
   let capturedJson: any;
 
   const originalJson = res.json.bind(res);
-	res.json = (body, ...rest: any[]) => {
-	  capturedJson = body;
-	  return originalJson(body, ...rest as any[]);
-	};
+  res.json = (body: any, ...rest: any[]) => {
+    capturedJson = body;
+    return originalJson(body, ...rest); 
+  };
 
   res.on('finish', () => {
     if (reqPath.startsWith('/api')) {
@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 
   // dev → Vite HMR  |  prod → statici
   if (app.get('env') === 'development') {
-    const { setupVite } = await import('./dev/vite');     // import dinamico
+    const { setupVite } = await import('./dev/vite.js');  // import dinamico
     await setupVite(app, server);
   } else {
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
