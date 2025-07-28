@@ -17,8 +17,9 @@
 	"include": [
 	  "./**/*.ts"
 	],
-  "exclude": [
-    "./__tests__",
-    "./vite.ts"
-  ]
+	"exclude": [
+	  "./__tests__",
+	  "./dev/**",
+	  "../vite.config.ts"
+	]
 }
