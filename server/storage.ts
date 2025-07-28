@@ -6,7 +6,7 @@ import {
   type PortfolioSnapshot, type InsertPortfolioSnapshot,
   type AssetSnapshot, type InsertAssetSnapshot
 } from "@shared/schema";
-import { db } from "./db";
+import { db } from "./db.js";
 import { eq, and, desc, sql, sum } from "drizzle-orm";
 
 export interface IStorage {
