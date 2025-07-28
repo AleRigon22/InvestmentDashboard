@@ -13,12 +13,9 @@
     },
     "types": ["node"]
   },
-  "include": [
-    "./db.ts",
-    "./routes.ts",
-    "./server.ts",
-    "./storage.ts"
-  ],
+	"include": [
+	  "./**/*.ts"
+	]
   "exclude": [
     "./__tests__",
     "./vite.ts"
