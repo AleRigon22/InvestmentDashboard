@@ -8,8 +8,8 @@
     "build-server": "tsc -p server/tsconfig.server.json",
     "build-client": "vite build",
     "build": "npm run build-server && npm run build-client",
-	"start:server": "NODE_ENV=production node dist/server/index.js",
-	"start": "npm run start:server"
+    "start:server": "NODE_ENV=production node -r tsconfig-paths/register dist/server/index.js",
+    "start": "npm run start:server"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -84,6 +84,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "ts-jest": "^29.4.0",
+    "tsconfig-paths": "^4.2.0",
     "tw-animate-css": "^1.2.5",
     "vaul": "^1.1.2",
     "wouter": "^3.3.5",
