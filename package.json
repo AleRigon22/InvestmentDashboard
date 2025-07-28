@@ -8,7 +8,7 @@
     "build-server": "tsc -p server/tsconfig.server.json",
     "build-client": "vite build",
     "build": "npm run build-server && npm run build-client",
-    "postbuild": "xcopy dist dist_public /E /I /Y"
+    "postbuild": "xcopy dist dist_public /E /I /Y",
     "start": "NODE_ENV=production node dist/index.js"
   },
   "dependencies": {
