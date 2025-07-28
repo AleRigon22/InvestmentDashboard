@@ -15,7 +15,7 @@
   },
 	"include": [
 	  "./**/*.ts"
-	]
+	],
   "exclude": [
     "./__tests__",
     "./vite.ts"
