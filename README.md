@@ -1,158 +1,142 @@
-# Investment Portfolio Tracker
 
-A production-ready, full-stack web application for managing personal investment portfolios with manual data entry, comprehensive tracking, and historical analysis.
+# 💼 Investment Portfolio Tracker
 
-## Features
+A production-ready, full-stack web application for tracking personal investments with manual input, historical performance charts, and dividend analysis — inspired by platforms like **Trade Republic** and **Getquin**.
 
-- **Portfolio Management**: Track stocks, ETFs, funds, and cryptocurrency holdings
-- **Transaction Recording**: Buy/sell transactions with fee calculation
-- **Price Updates**: Manual current price entry with automatic portfolio valuation
-- **Dividend Tracking**: Record and analyze dividend payments over time
-- **Cash Management**: Track deposits and withdrawals
-- **Historical Analysis**: Portfolio snapshots and performance charts
-- **User Authentication**: Secure login with session-based authentication
-- **Responsive Design**: Mobile-first design with Tailwind CSS
+---
 
-## Tech Stack
+## 🚀 Features
+
+- 📊 **Portfolio Dashboard**: Real-time market value, cost basis, total return (P/L), and dividend summary
+- 🧾 **Holdings Overview**: All active assets with filters and manual editing
+- 📈 **Asset Detail Page**: Historical chart comparing market value vs. invested amount, dividend breakdown
+- 💸 **Transaction Management**: Buy/sell tracking with commission fees and date-based sorting
+- 🪙 **Dividend Tracker**: Monthly bar chart with asset-colored segments and tooltips
+- 💼 **Manual Price Updates**: User-entered current prices to simulate valuation
+- 🔐 **Authentication**: Secure login with session-based user separation
+- 🧠 **Fully Local Workflow**: No live APIs; all data entered and updated by the user
+
+---
+
+## 🧱 Tech Stack
 
 ### Frontend
-- **React** with TypeScript
-- **Vite** for build tooling
-- **Tailwind CSS** for styling
+- **React** + **TypeScript**
+- **Vite** as build tool
+- **Tailwind CSS** for responsive design
 - **shadcn/ui** component library
-- **TanStack Query** for server state management
-- **Recharts** for data visualization
-- **Wouter** for routing
+- **Recharts** for custom data visualizations
+- **TanStack Query** for data fetching and caching
 
 ### Backend
-- **Node.js** with Express
-- **TypeScript** for type safety
-- **Drizzle ORM** with PostgreSQL
-- **Passport.js** for authentication
-- **bcrypt** for password hashing
+- **Express.js** with **TypeScript**
+- **Drizzle ORM** for typed SQL access
+- **SQLite** as lightweight local database
 
-## Getting Started
+### Deployment
+- Optimized for **Replit**
+- Compatible with **Vercel**, **Render**, or local Node environments
 
-### Prerequisites
-- Node.js 18+
-- PostgreSQL database
+---
 
-### Installation
+## 📸 Screenshots
 
-1. Clone the repository
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+> *(You can replace these with your real images once available)*
 
-3. Set up environment variables:
-   ```bash
-   DATABASE_URL=postgresql://username:password@localhost:5432/portfolio
-   SESSION_SECRET=your-secret-key
-   ```
+![Dashboard Overview](./screenshots/dashboard.png)
+*Full overview with performance, P/L, and dividend highlights*
 
-4. Set up the database:
-   ```bash
-   npm run db:push
-   ```
+![Holdings Page](./screenshots/holdings.png)
+*Manage and edit all assets manually*
 
-5. Start the development server:
-   ```bash
-   npm run dev
-   ```
+![Dividends Chart](./screenshots/dividends.png)
+*Interactive monthly dividend breakdown*
 
-The application will be available at `http://localhost:5000`
+---
 
-## Testing
-
-Run the test suite:
+## ⚙️ Getting Started
 
 ```bash
-# Backend tests
-npm run test
+# 1. Clone the repo
+git clone https://github.com/AleRigon22/InvestmentDashboard.git
+cd InvestmentDashboard
 
-# Frontend tests  
-npm run test:frontend
+# 2. Install dependencies
+npm install
 
-# All tests
-npm run test:all
-
-# Watch mode
-npm run test:watch
-
-# Coverage report
-npm run test:coverage
-```
-
-### Test Coverage
-
-The testing infrastructure includes:
-- **Backend**: Jest unit and integration tests for storage and authentication
-- **Frontend**: React Testing Library tests for key components
-- **Coverage**: Minimum 80% coverage target for critical paths
-
-## Database Schema
-
-The application uses 6 main tables:
-- `users` - User accounts and authentication
-- `assets` - Investment assets (stocks, ETFs, funds, crypto)
-- `transactions` - Buy/sell transaction history
-- `prices` - Manual price updates per asset
-- `dividends` - Dividend payment records
-- `cash_movements` - Cash deposits and withdrawals
-- `portfolio_snapshots` - Historical portfolio data
-
-## API Endpoints
-
-### Authentication
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `POST /api/auth/logout` - User logout
-- `GET /api/auth/me` - Current user info
-
-### Portfolio Management
-- `GET /api/assets` - Get user's assets
-- `POST /api/assets` - Create new asset
-- `GET /api/transactions` - Get user's transactions
-- `POST /api/transactions` - Create new transaction
-- `GET /api/portfolio/overview` - Portfolio summary and metrics
-- `GET /api/portfolio/closed-positions` - Closed position history
-
-## Development
-
-### Project Structure
-```
-├── client/          # React frontend
-├── server/          # Express backend
-├── shared/          # Shared TypeScript schemas
-├── __tests__/       # Test files
-└── dist/           # Production build output
-```
-
-### Building for Production
-
-```bash
+# 3. Build server and client
 npm run build
+
+# 4. Start in production mode
 npm start
+
+# Or run in development mode
+npm run dev
 ```
 
-## Recent Improvements
+---
 
-### January 2025
-- ✅ **Automated Testing**: Added Jest unit/integration tests for backend and React Testing Library tests for frontend
-- ✅ **Enhanced User Experience**: Fixed login redirect, current price updates, and history visualization
-- ✅ **Accessibility**: Added dialog descriptions to resolve accessibility warnings
-- ✅ **Independent Closed Positions**: Fixed position tracking to handle separate buy-sell cycles
-- ✅ **Enhanced Fee Handling**: Corrected fee calculations for accurate P&L reporting
+## 📁 Folder Structure
 
-## Contributing
+```bash
+client/        # React frontend
+server/        # Express + SQLite backend
+shared/        # Types and shared utilities
+attached_assets/  # Static local screenshots or assets
+dist/          # Built files
+```
 
-1. Fork the repository
-2. Create a feature branch
-3. Add tests for new functionality
-4. Ensure all tests pass
-5. Submit a pull request
+---
 
-## License
+## 🧪 Testing
 
-MIT License
+```bash
+# Run frontend and backend tests
+npm run test
+```
+
+---
+
+## 📌 TODOs / Roadmap
+
+- [ ] Optional API price fetching (disabled by design)
+- [ ] Advanced analytics (e.g. IRR, CAGR, sector exposure)
+- [ ] Export to CSV / PDF
+- [ ] Multi-currency support
+
+---
+
+## 🔒 Authentication
+
+- Email + password system
+- Session storage using cookies
+- Full separation of user-specific portfolios
+
+---
+
+## 🌐 Deployment Notes
+
+- Works natively on Replit
+- Also exportable to any Node-compatible environment
+- Make sure `.env` contains proper database path and secrets
+
+---
+
+## 📄 License
+
+This project is released under the **MIT License**.
+
+---
+
+## 👨‍💻 Author
+
+Developed by **Alessandro Rigon**  
+For professional inquiries or contributions, feel free to reach out via GitHub or LinkedIn.
+
+---
+
+## 🔗 Useful Links
+
+- 🔍 [Live Demo (if deployed)](https://your-demo-link.com)
+- 📚 [Drizzle ORM Docs](https://orm.drizzle.team/)
+- 🛠 [shadcn/ui](https://ui.shadcn.com/)
