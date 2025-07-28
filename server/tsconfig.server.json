@@ -23,6 +23,7 @@
 ],
 "exclude": [
   "./__tests__",
-  "./vite.ts"
+  "./vite.ts",
+  "../vite.config.ts"
 ]
 }
