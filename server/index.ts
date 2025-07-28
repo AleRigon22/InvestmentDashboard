@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url';
 import express, { Request, Response, NextFunction } from 'express';
 import { registerRoutes } from './routes.js';
 
-// logger minimale
 const log = (...args: any[]) => console.log('[server]', ...args);
 
 const app = express();
@@ -18,9 +17,9 @@ app.use((req, res, next) => {
   let capturedJson: any;
 
   const originalJson = res.json.bind(res);
-  res.json = (body: any, ...rest: any[]) => {
+  res.json = (body: any, ..._rest: any[]) => {
     capturedJson = body;
-    return originalJson(body, ...rest); 
+    return originalJson(body);
   };
 
   res.on('finish', () => {
@@ -39,16 +38,14 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
-  // handler errori
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status ?? err.statusCode ?? 500;
     res.status(status).json({ message: err.message ?? 'Internal Server Error' });
     throw err;
   });
 
-  // dev → Vite HMR  |  prod → statici
   if (app.get('env') === 'development') {
-    const { setupVite } = await import('./dev/vite.js');  // import dinamico
+    const { setupVite } = await import('./dev/vite.js');
     await setupVite(app, server);
   } else {
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -61,7 +58,6 @@ app.use((req, res, next) => {
   server.listen(port, () => log(`serving on port ${port}`));
 })();
 
-// helper per i test
 export async function createApp() {
   const testApp = express();
   testApp.use(express.json());
