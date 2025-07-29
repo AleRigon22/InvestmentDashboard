@@ -16,7 +16,7 @@ const loginSchema = z.object({
 });
 
 
-export async function registerRoutes(app: express.Express): express.Express) {
+export async function registerRoutes(app: express.Express) { express.Express) {
   // ─────── SESSIONE ───────
   if (!process.env.SESSION_SECRET) {
     throw new Error("SESSION_SECRET must be set in environment variables.");
