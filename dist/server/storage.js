@@ -1,5 +1,5 @@
 import { users, assets, transactions, prices, dividends, cashMovements, portfolioSnapshots, assetSnapshots } from "@shared/schema";
-import { db } from "./db";
+import { db } from "./db.js";
 import { eq, and, desc, sql } from "drizzle-orm";
 export class DatabaseStorage {
     async getUser(id) {

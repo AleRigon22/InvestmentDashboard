@@ -1,30 +1,31 @@
 import 'dotenv/config';
-import express from "express";
-import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import path from 'path';
+import { fileURLToPath } from 'url';
+import express from 'express';
+import { registerRoutes } from './routes.js';
+const log = (...args) => console.log('[server]', ...args);
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+// ────────── middleware log API ──────────
 app.use((req, res, next) => {
     const start = Date.now();
-    const path = req.path;
-    let capturedJsonResponse = undefined;
-    const originalResJson = res.json;
-    res.json = function (bodyJson, ...args) {
-        capturedJsonResponse = bodyJson;
-        return originalResJson.apply(res, [bodyJson, ...args]);
+    const reqPath = req.path;
+    let capturedJson;
+    const originalJson = res.json.bind(res);
+    res.json = (body, ..._rest) => {
+        capturedJson = body;
+        return originalJson(body);
     };
-    res.on("finish", () => {
-        const duration = Date.now() - start;
-        if (path.startsWith("/api")) {
-            let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-            if (capturedJsonResponse) {
-                logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
-            }
-            if (logLine.length > 80) {
-                logLine = logLine.slice(0, 79) + "…";
-            }
-            log(logLine);
+    res.on('finish', () => {
+        if (reqPath.startsWith('/api')) {
+            const ms = Date.now() - start;
+            let line = `${req.method} ${reqPath} ${res.statusCode} in ${ms}ms`;
+            if (capturedJson)
+                line += ` :: ${JSON.stringify(capturedJson)}`;
+            if (line.length > 80)
+                line = line.slice(0, 79) + '…';
+            log(line);
         }
     });
     next();
@@ -32,33 +33,26 @@ app.use((req, res, next) => {
 (async () => {
     const server = await registerRoutes(app);
     app.use((err, _req, res, _next) => {
-        const status = err.status || err.statusCode || 500;
-        const message = err.message || "Internal Server Error";
-        res.status(status).json({ message });
+        const status = err.status ?? err.statusCode ?? 500;
+        res.status(status).json({ message: err.message ?? 'Internal Server Error' });
         throw err;
     });
-    // importantly only setup vite in development and after
-    // setting up all the other routes so the catch-all route
-    // doesn't interfere with the other routes
-    if (app.get("env") === "development") {
+    if (app.get('env') === 'development') {
+        const { setupVite } = await import('./dev/vite.js');
         await setupVite(app, server);
     }
     else {
-        serveStatic(app);
+        const __dirname = path.dirname(fileURLToPath(import.meta.url));
+        const clientPath = path.resolve(__dirname, '../dist/public');
+        app.use(express.static(clientPath));
+        log('serving static files from', clientPath);
     }
-    // ALWAYS serve the app on the port specified in the environment variable PORT
-    // Other ports are firewalled. Default to 5000 if not specified.
-    // this serves both the API and the client.
-    // It is the only port that is not firewalled.
-    const port = parseInt(process.env.PORT || '5000', 10);
-    server.listen(port, () => {
-        log(`serving on port ${port}`);
-    });
+    const port = parseInt(process.env.PORT ?? '5000', 10);
+    server.listen(port, () => log(`serving on port ${port}`));
 })();
-// Export for testing
-export async function createApp(storage) {
+export async function createApp() {
     const testApp = express();
     testApp.use(express.json());
     testApp.use(express.urlencoded({ extended: false }));
-    return await registerRoutes(testApp);
+    return registerRoutes(testApp);
 }

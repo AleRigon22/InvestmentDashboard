@@ -8,20 +8,19 @@
     "skipLibCheck": true,
     "strict": true,
     "baseUrl": ".",
+    "rootDir": "..",
     "paths": {
       "@shared/*": ["../shared/*"]
     },
     "types": ["node"],
-    "typeRoots": ["../node_modules/@types"]
+	"typeRoots": ["../node_modules/@types"]
   },
-
   "include": [
-    "./db.ts",
-    "./routes.ts",
-    "./index.ts",
-    "./storage.ts"
+    "./**/*.ts",
+    "../shared/**/*.ts"
   ],
   "exclude": [
+    "../node_modules",
     "./__tests__",
     "./dev/**",
     "../vite.config.ts"

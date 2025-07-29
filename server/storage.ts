@@ -5,7 +5,7 @@ import {
   type Dividend, type InsertDividend, type CashMovement, type InsertCashMovement,
   type PortfolioSnapshot, type InsertPortfolioSnapshot,
   type AssetSnapshot, type InsertAssetSnapshot
-} from "../shared/schema.js";
+} from "@shared/schema";
 import { db } from "./db.js";
 import { eq, and, desc, sql, sum } from "drizzle-orm";
 

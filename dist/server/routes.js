@@ -3,7 +3,7 @@ import session from "express-session";
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcrypt";
-import { storage } from "./storage";
+import { storage } from "./storage.js";
 import { insertUserSchema, insertAssetSchema, insertTransactionSchema, insertPriceSchema, insertDividendSchema, insertCashMovementSchema, insertPortfolioSnapshotSchema, insertAssetSnapshotSchema } from "@shared/schema";
 import { z } from "zod";
 const loginSchema = z.object({
