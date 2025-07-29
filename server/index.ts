@@ -48,12 +48,8 @@ app.use((req, res, next) => {
     const { setupVite } = await import('./dev/vite.js');
     await setupVite(app, server);
   } else {
-    const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    const clientPath = path.resolve(__dirname, 'dist_public');
-    app.use(express.static(clientPath));
-    log('serving static files from', clientPath);
-
-    // Route fallback per SPA
+    const clientPath = path.resolve(process.cwd(), 'dist_public');
+    app.use(express.static(clientPath)); // Serve i file statici (JS, CSS, immagini, ecc.)
     app.get('*', (_req, res) => {
       res.sendFile(path.join(clientPath, 'index.html'));
     });
