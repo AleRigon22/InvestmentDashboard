@@ -1,4 +1,5 @@
 import type { Express } from "express";
+import session from 'express-session';
 import { createServer, type Server } from "http";
 import session from "express-session";
 import passport from "passport";
@@ -13,7 +14,27 @@ const loginSchema = z.object({
   password: z.string().min(1),
 });
 
-export async function registerRoutes(app: Express): Promise<Server> {
+import session from 'express-session';
+
+export async function registerRoutes(app: express.Express) {
+  // ─────── SESSIONE ───────
+  if (!process.env.SESSION_SECRET) {
+    throw new Error("SESSION_SECRET must be set in environment variables.");
+  }
+
+  app.use(
+    session({
+      secret: process.env.SESSION_SECRET!,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: 1000 * 60 * 60 * 24 * 7, // 1 settimana
+      },
+    })
+  );
   // Session configuration
   app.use(session({
     secret: process.env.SESSION_SECRET || 'your-secret-key',
