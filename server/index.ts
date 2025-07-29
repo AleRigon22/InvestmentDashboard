@@ -49,11 +49,17 @@ app.use((req, res, next) => {
     await setupVite(app, server);
   } else {
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    const clientPath = path.resolve(__dirname, '../dist/public');
+    const clientPath = path.resolve(__dirname, '../dist_public');
     app.use(express.static(clientPath));
     log('serving static files from', clientPath);
+
+    // Route fallback per SPA
+    app.get('*', (_req, res) => {
+      res.sendFile(path.join(clientPath, 'index.html'));
+    });
   }
 
+  // ✅ Fuori dal blocco if/else
   const port = parseInt(process.env.PORT ?? '5000', 10);
   server.listen(port, () => log(`serving on port ${port}`));
 })();

@@ -8,8 +8,9 @@
     "build-server": "tsc -p server/tsconfig.server.json",
     "build-client": "vite build",
     "build": "npm run build-server && npm run build-client",
-    "start:server": "NODE_ENV=production node -r tsconfig-paths/register dist/server/index.js",
-    "start": "npm run start:server"
+    "start:server": "cross-env NODE_ENV=production node -r tsconfig-paths/register dist/server/index.js",
+    "start": "npm run start:server",
+	"postbuild": "node postbuild.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
