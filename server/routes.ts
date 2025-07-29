@@ -1,5 +1,6 @@
 import type { Express } from "express";
 import session from 'express-session';
+import { Request, Response } from 'express';
 import { createServer, type Server } from "http";
 import session from "express-session";
 import passport from "passport";
@@ -14,7 +15,6 @@ const loginSchema = z.object({
   password: z.string().min(1),
 });
 
-import session from 'express-session';
 
 export async function registerRoutes(app: express.Express) {
   // ─────── SESSIONE ───────
@@ -37,7 +37,7 @@ export async function registerRoutes(app: express.Express) {
   );
   // Session configuration
   app.use(session({
-    secret: process.env.SESSION_SECRET || 'jwt-gfb67iwfsnd1sl7jbygiooy24sbwbuyy5bzk69hwcvj7iep',
+    secret: process.env.SESSION_SECRET || 'your-secret-key',
     resave: false,
     saveUninitialized: false,
     cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 } // 24 hours
@@ -89,7 +89,7 @@ export async function registerRoutes(app: express.Express) {
   };
 
   // Auth routes
-  app.post('/api/auth/register', async (req, res) => {
+  app.post('/api/auth/register', async (req: Request, res: Response) => {
     try {
       const validatedData = insertUserSchema.parse(req.body);
       const { username, password } = validatedData;
@@ -122,12 +122,12 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.post('/api/auth/login', passport.authenticate('local'), (req, res) => {
+  app.post('/api/auth/login', passport.authenticate('local'), (req: Request, res: Response) => {
     const user = req.user as any;
     res.json({ user: { id: user.id, username: user.username, portfolioName: user.portfolioName } });
   });
 
-  app.post('/api/auth/logout', (req, res) => {
+  app.post('/api/auth/logout', (req: Request, res: Response) => {
     req.logout((err) => {
       if (err) {
         return res.status(500).json({ message: 'Logout failed' });
@@ -136,12 +136,12 @@ export async function registerRoutes(app: express.Express) {
     });
   });
 
-  app.get('/api/auth/me', requireAuth, (req, res) => {
+  app.get('/api/auth/me', requireAuth, (req: Request, res: Response) => {
     const user = req.user as any;
     res.json({ user: { id: user.id, username: user.username, portfolioName: user.portfolioName } });
   });
 
-  app.put('/api/auth/portfolio-name', requireAuth, async (req, res) => {
+  app.put('/api/auth/portfolio-name', requireAuth, async (req: Request, res: Response) => {
     try {
       const { portfolioName } = req.body;
       const user = req.user as any;
@@ -155,7 +155,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Assets routes
-  app.get('/api/assets', requireAuth, async (req, res) => {
+  app.get('/api/assets', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const assets = await storage.getAssetsByUserId(user.id);
@@ -165,7 +165,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.post('/api/assets', requireAuth, async (req, res) => {
+  app.post('/api/assets', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const assetData = insertAssetSchema.parse(req.body);
@@ -176,7 +176,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.put('/api/assets/:id', requireAuth, async (req, res) => {
+  app.put('/api/assets/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -191,7 +191,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.patch('/api/assets/:id', requireAuth, async (req, res) => {
+  app.patch('/api/assets/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -213,7 +213,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.delete('/api/assets/:id', requireAuth, async (req, res) => {
+  app.delete('/api/assets/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -228,7 +228,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Transactions routes
-  app.get('/api/transactions', requireAuth, async (req, res) => {
+  app.get('/api/transactions', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const transactions = await storage.getTransactionsByUserId(user.id);
@@ -238,7 +238,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.post('/api/transactions', requireAuth, async (req, res) => {
+  app.post('/api/transactions', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       console.log('Transaction request body:', req.body);
@@ -258,7 +258,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.put('/api/transactions/:id', requireAuth, async (req, res) => {
+  app.put('/api/transactions/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -273,7 +273,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.delete('/api/transactions/:id', requireAuth, async (req, res) => {
+  app.delete('/api/transactions/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -288,7 +288,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Prices routes
-  app.get('/api/prices', requireAuth, async (req, res) => {
+  app.get('/api/prices', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const prices = await storage.getPricesByUserId(user.id);
@@ -298,7 +298,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.post('/api/prices', requireAuth, async (req, res) => {
+  app.post('/api/prices', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       console.log('Price request body:', req.body);
@@ -326,7 +326,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.put('/api/prices/:id', requireAuth, async (req, res) => {
+  app.put('/api/prices/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -342,7 +342,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Dividends routes
-  app.get('/api/dividends', requireAuth, async (req, res) => {
+  app.get('/api/dividends', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const dividends = await storage.getDividendsByUserId(user.id);
@@ -352,7 +352,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.post('/api/dividends', requireAuth, async (req, res) => {
+  app.post('/api/dividends', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       console.log('Dividend request body:', req.body);
@@ -373,7 +373,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.put('/api/dividends/:id', requireAuth, async (req, res) => {
+  app.put('/api/dividends/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -388,7 +388,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.delete('/api/dividends/:id', requireAuth, async (req, res) => {
+  app.delete('/api/dividends/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -403,7 +403,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Cash movements routes
-  app.get('/api/cash-movements', requireAuth, async (req, res) => {
+  app.get('/api/cash-movements', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const cashMovements = await storage.getCashMovementsByUserId(user.id);
@@ -413,7 +413,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.post('/api/cash-movements', requireAuth, async (req, res) => {
+  app.post('/api/cash-movements', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const cashMovementData = insertCashMovementSchema.parse(req.body);
@@ -424,7 +424,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.put('/api/cash-movements/:id', requireAuth, async (req, res) => {
+  app.put('/api/cash-movements/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -439,7 +439,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.delete('/api/cash-movements/:id', requireAuth, async (req, res) => {
+  app.delete('/api/cash-movements/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -454,7 +454,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Portfolio overview route
-  app.get('/api/portfolio/overview', requireAuth, async (req, res) => {
+  app.get('/api/portfolio/overview', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const overview = await storage.getPortfolioOverview(user.id);
@@ -465,7 +465,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Dividends summary route
-  app.get('/api/dividends/summary', requireAuth, async (req, res) => {
+  app.get('/api/dividends/summary', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const summary = await storage.getDividendsSummary(user.id);
@@ -476,7 +476,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Closed positions route
-  app.get('/api/portfolio/closed-positions', requireAuth, async (req, res) => {
+  app.get('/api/portfolio/closed-positions', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const closedPositions = await storage.getClosedPositions(user.id);
@@ -487,7 +487,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.delete('/api/portfolio/closed-positions/:cycleId', requireAuth, async (req, res) => {
+  app.delete('/api/portfolio/closed-positions/:cycleId', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       await storage.deleteClosedPosition(user.id, req.params.cycleId);
@@ -499,7 +499,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Portfolio snapshots routes
-  app.get('/api/portfolio/snapshots', requireAuth, async (req, res) => {
+  app.get('/api/portfolio/snapshots', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const snapshots = await storage.getPortfolioSnapshots(user.id);
@@ -509,7 +509,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.post('/api/portfolio/snapshots', requireAuth, async (req, res) => {
+  app.post('/api/portfolio/snapshots', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const snapshotData = insertPortfolioSnapshotSchema.parse(req.body);
@@ -527,7 +527,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.put('/api/portfolio/snapshots/:id', requireAuth, async (req, res) => {
+  app.put('/api/portfolio/snapshots/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -549,7 +549,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.delete('/api/portfolio/snapshots/:id', requireAuth, async (req, res) => {
+  app.delete('/api/portfolio/snapshots/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -564,7 +564,7 @@ export async function registerRoutes(app: express.Express) {
   });
 
   // Asset snapshots routes
-  app.get('/api/assets/:assetId/snapshots', requireAuth, async (req, res) => {
+  app.get('/api/assets/:assetId/snapshots', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const assetId = parseInt(req.params.assetId);
@@ -575,7 +575,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.post('/api/assets/:assetId/snapshots', requireAuth, async (req, res) => {
+  app.post('/api/assets/:assetId/snapshots', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const assetId = parseInt(req.params.assetId);
@@ -594,7 +594,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.post('/api/assets/:assetId/snapshots/generate', requireAuth, async (req, res) => {
+  app.post('/api/assets/:assetId/snapshots/generate', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const assetId = parseInt(req.params.assetId);
@@ -606,7 +606,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.put('/api/assets/:assetId/snapshots/:id', requireAuth, async (req, res) => {
+  app.put('/api/assets/:assetId/snapshots/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
@@ -628,7 +628,7 @@ export async function registerRoutes(app: express.Express) {
     }
   });
 
-  app.delete('/api/assets/:assetId/snapshots/:id', requireAuth, async (req, res) => {
+  app.delete('/api/assets/:assetId/snapshots/:id', requireAuth, async (req: Request, res: Response) => {
     try {
       const user = req.user as any;
       const id = parseInt(req.params.id);
