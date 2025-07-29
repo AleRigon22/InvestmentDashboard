@@ -1,4 +1,4 @@
-import { users, assets, transactions, prices, dividends, cashMovements, portfolioSnapshots, assetSnapshots } from "@shared/schema";
+import { users, assets, transactions, prices, dividends, cashMovements, portfolioSnapshots, assetSnapshots } from '../shared/schema.js';
 import { db } from "./db.js";
 import { eq, and, desc, sql } from "drizzle-orm";
 export class DatabaseStorage {
