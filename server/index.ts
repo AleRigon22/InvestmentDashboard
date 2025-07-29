@@ -49,7 +49,7 @@ app.use((req, res, next) => {
     await setupVite(app, server);
   } else {
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    const clientPath = path.resolve(__dirname, '../dist_public');
+    const clientPath = path.resolve(__dirname, 'dist_public');
     app.use(express.static(clientPath));
     log('serving static files from', clientPath);
 
