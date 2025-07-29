@@ -5,7 +5,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcrypt";
 import { storage } from "./storage.js";
-import { insertUserSchema, insertAssetSchema, insertTransactionSchema, insertPriceSchema, insertDividendSchema, insertCashMovementSchema, insertPortfolioSnapshotSchema, insertAssetSnapshotSchema } from "@shared/schema";
+import { insertUserSchema, insertAssetSchema, insertTransactionSchema, insertPriceSchema, insertDividendSchema, insertCashMovementSchema, insertPortfolioSnapshotSchema, insertAssetSnapshotSchema } from "../../shared/schema.js";
 import { z } from "zod";
 
 const loginSchema = z.object({
